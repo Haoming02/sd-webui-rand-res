@@ -3,7 +3,7 @@ import random
 import gradio as gr
 
 from modules import rng, scripts
-from modules.processing import StableDiffusionProcessing, opt_f
+from modules.processing import StableDiffusionProcessingTxt2Img, opt_f
 from modules.ui_components import ToolButton
 
 ext = os.path.dirname(os.path.dirname(__file__))
@@ -62,7 +62,7 @@ class RandomResolution(scripts.Script):
 
     def before_process_batch(
         self,
-        p: StableDiffusionProcessing,
+        p: StableDiffusionProcessingTxt2Img,
         randomize: bool,
         batch_number: int,
         prompts: list[str],
@@ -78,6 +78,7 @@ class RandomResolution(scripts.Script):
 
         p.width = w
         p.height = h
+        p.calculate_target_resolution()
         print(f"[Rand. Res] Set to {w} x {h}")
 
         _c, *_ = p.rng.shape
