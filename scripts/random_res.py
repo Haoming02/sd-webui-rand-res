@@ -81,10 +81,10 @@ class RandomResolution(scripts.Script):
         p.calculate_target_resolution()
         print(f"[Rand. Res] Set to {w} x {h}")
 
-        _c, *_ = p.rng.shape
+        *ct, _, _ = p.rng.shape
 
         p.rng = rng.ImageRNG(
-            (_c, p.height // opt_f, p.width // opt_f),
+            (*ct, p.height // opt_f, p.width // opt_f),
             p.seeds,
             subseeds=p.subseeds,
             subseed_strength=p.subseed_strength,
